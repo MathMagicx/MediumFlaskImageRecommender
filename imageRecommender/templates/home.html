@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+    <section class="gallery">
+        <div class="galleryWrapper">
+            <div class="galleryContent">
+                {% for image in images.items %} 
+                    <div class="item">
+                    <a href="{{ url_for('main.recommend', selectedImage='') }}{{image.imageName }}">
+                        <img src="{{ url_for('static', filename='site_imgs/images/') }}{{image.imageName}}" alt="{{image.imageName}}" id="showSimilarInPopup"> 
+                        <div class="caption">
+                            {{image.imageDescription}}
+                        </div>
+                    </a>
+                    </div>                
+                {% endfor %}
+            </div>
+            <div class="pagination">
+            {% for page_num in images.iter_pages(left_edge=2, right_edge=2, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if images.page == page_num %}
+                        <a class="currentpage" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                    {% else %}
+                        <a class="otherpages" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                ...
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+{% endblock content %}

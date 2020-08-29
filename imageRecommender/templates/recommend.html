@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+    <section class="gallery">
+        <div class="galleryWrapper">
+            <div class="originalImage">
+                <h3> INPUT IMAGE</h3>
+                <img src="{{ url_for('static', filename='site_imgs/images/') }}{{inputImage}}" alt="{{similarImages[0]}}" id="showSimilarInPopup"> 
+            </div>
+            <div class="galleryContent">
+                <h3> SIMILAR IMAGES</h3>
+                {% for image in similarImages %}
+                <div class="item">
+                        <img id="popupImage{{loop.index}}" onclick="imageClicked(this.id)" src="{{ url_for('static', filename='site_imgs/images/') }}{{image}}" alt="{{image}}" id="showSimilarInPopup"> 
+                </div>                
+                {% endfor %}
+            </div>     
+        </div>
+    </section>
+
+    <!-- The Modal for showing a selected image enlarged -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="thePopupImageID">
+        <div id="caption"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/imagemodal.js') }}"></script>
+{% endblock content %}

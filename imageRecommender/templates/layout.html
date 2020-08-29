@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if title %}
+    <title> {{title}} </title>
+    {% else %}
+    <title> Image Recommendations </title>
+    {% endif %}  
+    <meta name="Recommender Gallery for TDS article">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {%if customstyle %}
+    <link rel="cusotm page stylesheet" href="{{ url_for('static', filename='css/') }}{{customstyle}}">
+    {% endif %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" >
+</head>
+
+<body>
+    <section class="header">
+        <div class="headerImage">
+            <a href="/"><img src="{{url_for('static', filename='site_imgs/Logo.png')}}" alt="mds Logo"></a>
+        </div>
+    </section>
+    {% block content %} {% endblock %}
+</body>
+
+</html> 
